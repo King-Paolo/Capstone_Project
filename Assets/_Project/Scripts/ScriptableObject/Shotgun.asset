@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a2293015881dc4e806bdb7146fc7e1, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8998750919760101644, guid: 8cdee4c0f2bfa724ebf747e8d4f8403b,
+    type: 3}
+  damage: 50
   weaponName: Shotgun
   fireRate: 1.2
   range: 15
+  speed: 50
   maxAmmo: 6
+  reloadTime: 0

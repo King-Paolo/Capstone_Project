@@ -5,7 +5,10 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] private SO_WeaponData _data;
     [SerializeField] private int _remainingAmmo;
+    [SerializeField] private int _bulletIndex;
+    [SerializeField] private Transform _firePoint;
 
+    private BulletPool _bulletPool;
     private int _currentAmmo;
     private float _shootDelay;
     private bool _isReloading;
@@ -13,6 +16,11 @@ public class Weapon : MonoBehaviour
     private void Awake()
     {
         _currentAmmo = _data.maxAmmo;
+
+        if (_bulletPool == null)
+        {
+            _bulletPool = FindObjectOfType<BulletPool>();
+        }
     }
 
     private void Update()
@@ -37,12 +45,24 @@ public class Weapon : MonoBehaviour
 
     public void Shoot()
     {
-        _currentAmmo--;
-        _currentAmmo = Mathf.Clamp(_currentAmmo, 0, _data.maxAmmo);
+        GameObject bullet = _bulletPool.GetBullet(_bulletIndex);
+
+        if (bullet != null)
+        {
+            bullet.transform.position = _firePoint.position;
+            bullet.transform.rotation = _firePoint.rotation;
+
+            bullet.GetComponent<Bullets>().Setup(_firePoint.forward, _data.range, _data.speed, _data.damage);
+
+            _currentAmmo--;
+            _currentAmmo = Mathf.Clamp(_currentAmmo, 0, _data.maxAmmo);
+            Debug.Log("munizioni in canna" + _currentAmmo);
+        }
     }
 
     public IEnumerator Reload()
     {
+        Debug.Log("Ricarico" + "munizioni disponibili" + _remainingAmmo);
         _isReloading = true;
 
         yield return new WaitForSeconds(_data.reloadTime);
@@ -54,5 +74,6 @@ public class Weapon : MonoBehaviour
         _remainingAmmo -= amountToTake;
 
         _isReloading = false;
+        Debug.Log(" caricate " + amountToTake + " munizioni in canna " + _currentAmmo + " Munizioni rimanenti " + _remainingAmmo);
     }
 }

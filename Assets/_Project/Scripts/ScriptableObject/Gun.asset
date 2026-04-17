@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a2293015881dc4e806bdb7146fc7e1, type: 3}
   m_Name: Gun
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8998750919760101644, guid: 2e8b64248aef10a49841d0bfe16c4023,
+    type: 3}
+  damage: 10
   weaponName: Gun
   fireRate: 0.5
   range: 30
+  speed: 50
   maxAmmo: 12
+  reloadTime: 0

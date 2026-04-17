@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a2293015881dc4e806bdb7146fc7e1, type: 3}
   m_Name: AssaultRifle
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8998750919760101644, guid: b4a8b9e58be20f74686a68f83172f8b5,
+    type: 3}
+  damage: 7
   weaponName: Assault Rifle
   fireRate: 0.15
   range: 50
+  speed: 50
   maxAmmo: 30
+  reloadTime: 0
