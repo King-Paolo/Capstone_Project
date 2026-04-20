@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _rotationSpeed = 15f;
     [SerializeField] private Camera _camera;
+    [SerializeField] private Animator _animator;
 
     private Rigidbody _rb;
     private Vector3 _move;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             Vector3 targetPoint = hit.point;
+
             Vector3 direction = targetPoint - transform.position;
             direction.y = 0;
 
@@ -40,6 +42,11 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(transform.rotation, rotation, _rotationSpeed * Time.deltaTime);
             }
         }
+
+        Vector3 localMove = transform.InverseTransformDirection(_move);
+
+        _animator.SetFloat("Horizontal", localMove.x);
+        _animator.SetFloat("Vertical", localMove.z);
     }
 
     private void FixedUpdate()
