@@ -12,6 +12,9 @@ public class Weapon : MonoBehaviour
     private int _currentAmmo;
     private float _shootDelay;
     private bool _isReloading;
+    private bool _isAiming;
+
+    public bool IsAiming { get { return _isAiming; } }
 
     private void Awake()
     {
@@ -30,11 +33,17 @@ public class Weapon : MonoBehaviour
 
         if (Input.GetMouseButton(0) && _currentAmmo > 0)
         {
+            _isAiming = true;
+
             if (Time.time >= _shootDelay)
             {
                 Shoot();
                 _shootDelay = Time.time + _data.fireRate;
             }
+        }
+        else
+        {
+            _isAiming = false;
         }
 
         if (Input.GetKeyDown(KeyCode.R) && _currentAmmo < _data.maxAmmo && _remainingAmmo > 0)

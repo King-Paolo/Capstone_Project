@@ -2,18 +2,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5f;
+    [SerializeField] private float _movementSpeed = 5f;
+    [SerializeField] private float _firingSpeed = 2f;
     [SerializeField] private float _rotationSpeed = 15f;
     [SerializeField] private Camera _camera;
     [SerializeField] private Animator _animator;
 
     private Rigidbody _rb;
     private Vector3 _move;
+    private Weapon _weapon;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _camera = Camera.main;
+        _weapon = GetComponentInChildren<Weapon>();
     }
 
     private void Update()
@@ -51,6 +54,17 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.MovePosition(_rb.position + _move * (_speed * Time.fixedDeltaTime));
+        float speed;
+
+        if (_weapon.IsAiming)
+        {
+            speed = _firingSpeed;
+        }
+        else
+        {
+            speed = _movementSpeed;
+        }
+
+        _rb.MovePosition(_rb.position + _move * (speed * Time.fixedDeltaTime));
     }
 }

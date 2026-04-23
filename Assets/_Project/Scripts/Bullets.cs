@@ -48,6 +48,7 @@ public class Bullets : MonoBehaviour
         {
             LifeController enemy = collision.gameObject.GetComponent<LifeController>();
             enemy.TakeDamage(_damage);
+            Debug.Log("Colpito");
         }
     }
     public void Setup(Vector3 direction, float range, float speed, int damage)
