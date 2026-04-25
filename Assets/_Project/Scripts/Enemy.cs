@@ -3,6 +3,8 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] int _damage;
+
     private Transform _target;
     private NavMeshAgent _agent;
     private LifeController _lifeController;
@@ -61,6 +63,15 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            LifeController player = collision.gameObject.GetComponent<LifeController>();
+
+            player.TakeDamage(_damage);
+        }
+    }
     public void Attack(bool inRange)
     {
         //aggiungere animation.SetBool(isInRange) per animazione di attacco

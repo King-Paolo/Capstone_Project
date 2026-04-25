@@ -13,6 +13,7 @@ public class Weapon : MonoBehaviour
     private float _shootDelay;
     private bool _isReloading;
     private bool _isAiming;
+    private Animator _animator;
 
     public bool IsAiming { get { return _isAiming; } }
 
@@ -24,6 +25,8 @@ public class Weapon : MonoBehaviour
         {
             _bulletPool = FindObjectOfType<BulletPool>();
         }
+
+        _animator = GetComponentInParent<Animator>();
     }
 
     private void Update()
@@ -73,6 +76,8 @@ public class Weapon : MonoBehaviour
     {
         Debug.Log("Ricarico" + "munizioni disponibili" + _remainingAmmo);
         _isReloading = true;
+
+        _animator.SetTrigger("IsReloading");
 
         yield return new WaitForSeconds(_data.reloadTime);
 

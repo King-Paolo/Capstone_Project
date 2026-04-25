@@ -7,20 +7,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 15f;
     [SerializeField] private Camera _camera;
     [SerializeField] private Animator _animator;
+    [SerializeField] private LayerMask _ground;
 
     private Rigidbody _rb;
     private Vector3 _move;
     private Weapon _weapon;
+    private LifeController _player;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _camera = Camera.main;
         _weapon = GetComponentInChildren<Weapon>();
+        _player = GetComponent<LifeController>();
     }
 
     private void Update()
     {
+        if (_player.IsDead) return;
+
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         float sqrtLenght = input.sqrMagnitude;
 
@@ -31,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _ground))
         {
             Vector3 targetPoint = hit.point;
 

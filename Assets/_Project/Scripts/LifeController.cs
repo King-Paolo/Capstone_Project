@@ -35,6 +35,8 @@ public class LifeController : MonoBehaviour
         {
             _isDead = true;
             _animator.SetTrigger("IsDead");
+
+            if (CompareTag("Enemy"))
             StartCoroutine(DeathTimer());
         }
     }
