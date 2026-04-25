@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _move;
     private Weapon _weapon;
     private LifeController _player;
+    private Quaternion _targetRotation;
 
     private void Awake()
     {
@@ -38,16 +39,21 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _ground))
         {
-            Vector3 targetPoint = hit.point;
+            //Vector3 targetPoint = hit.point;
 
-            Vector3 direction = targetPoint - transform.position;
+            Vector3 direction = hit.point - transform.position;
             direction.y = 0;
 
-            if (direction != Vector3.zero)
-            {
-                Quaternion rotation = Quaternion.LookRotation(direction);
+            //if (direction != Vector3.zero)
+            //{
+            //    Quaternion rotation = Quaternion.LookRotation(direction);
 
-                transform.rotation = Quaternion.Lerp(transform.rotation, rotation, _rotationSpeed * Time.deltaTime);
+            //    transform.rotation = Quaternion.Lerp(transform.rotation, rotation, _rotationSpeed * Time.deltaTime);
+            //}
+
+            if (direction.sqrMagnitude > 0.001f)
+            {
+                _targetRotation = Quaternion.LookRotation(direction);
             }
         }
 
@@ -71,5 +77,7 @@ public class PlayerController : MonoBehaviour
         }
 
         _rb.MovePosition(_rb.position + _move * (speed * Time.fixedDeltaTime));
+
+        _rb.MoveRotation(Quaternion.Lerp(_rb.rotation, _targetRotation, _rotationSpeed *  Time.fixedDeltaTime));
     }
 }
