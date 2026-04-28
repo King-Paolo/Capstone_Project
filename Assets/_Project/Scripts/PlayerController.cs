@@ -23,6 +23,12 @@ public class PlayerController : MonoBehaviour
         _player = GetComponent<LifeController>();
     }
 
+    private void Start()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
     private void Update()
     {
         if (_player.IsDead) return;

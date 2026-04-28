@@ -45,7 +45,7 @@ public class LifeController : MonoBehaviour
 
     public IEnumerator DeathTimer()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3.5f);
 
         if (CompareTag("Enemy"))
         {

@@ -20,4 +20,4 @@ MonoBehaviour:
   range: 50
   speed: 50
   maxAmmo: 30
-  reloadTime: 0
+  reloadTime: 3.2

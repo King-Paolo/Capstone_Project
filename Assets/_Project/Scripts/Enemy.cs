@@ -8,11 +8,14 @@ public class Enemy : MonoBehaviour
     private Transform _target;
     private NavMeshAgent _agent;
     private LifeController _lifeController;
+    private bool _isAttacking;
+    private Animator _animator;
 
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _lifeController = GetComponent<LifeController>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void OnEnable()
@@ -22,6 +25,7 @@ public class Enemy : MonoBehaviour
             _agent.enabled = true;
             _agent.Warp(transform.position);
             _agent.isStopped = false;
+            _isAttacking = false;
         }
     }
 
@@ -53,27 +57,41 @@ public class Enemy : MonoBehaviour
         if (distance <= _agent.stoppingDistance)
         {
             _agent.isStopped = true;
-            Attack(true);
+            Attack();
         }
         else
         {
             _agent.isStopped = false;
             _agent.SetDestination(_target.position);
-            Attack(false);
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player") && _isAttacking)
         {
-            LifeController player = collision.gameObject.GetComponent<LifeController>();
+            LifeController player = other.GetComponent<LifeController>();
 
-            player.TakeDamage(_damage);
+            if (player != null)
+            {
+                player.TakeDamage(_damage);
+
+                _isAttacking = false;
+            }
         }
     }
-    public void Attack(bool inRange)
+    public void Attack()
     {
-        //aggiungere animation.SetBool(isInRange) per animazione di attacco
+        _animator.SetTrigger("IsAttacking");
+    }
+
+    public void EnableDamage()
+    {
+        _isAttacking = true;
+    }
+
+    public void DisableDamage()
+    {
+        _isAttacking = false;
     }
 }

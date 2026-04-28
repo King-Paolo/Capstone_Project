@@ -40,13 +40,13 @@ public class Bullets : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         gameObject.SetActive(false);
 
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy"))
         {
-            LifeController enemy = collision.gameObject.GetComponent<LifeController>();
+            LifeController enemy = other.GetComponent<LifeController>();
             enemy.TakeDamage(_damage);
             Debug.Log("Colpito");
         }
