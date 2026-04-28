@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4243371153570508
 Transform:
   m_ObjectHideFlags: 0
@@ -317,12 +317,17 @@ PrefabInstance:
     - target: {fileID: 143435283305110860, guid: d2e5e22cbce9e474fa8be27acb5250c0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.5
+      value: -1.94
       objectReference: {fileID: 0}
     - target: {fileID: 5938564862597106892, guid: d2e5e22cbce9e474fa8be27acb5250c0,
         type: 3}
       propertyPath: m_Name
       value: Flashlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 6335628797828824664, guid: d2e5e22cbce9e474fa8be27acb5250c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9081726239003976316, guid: d2e5e22cbce9e474fa8be27acb5250c0,
         type: 3}
