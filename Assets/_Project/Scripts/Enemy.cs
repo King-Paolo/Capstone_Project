@@ -70,13 +70,14 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Player") && _isAttacking)
         {
+            Debug.Log("Ho toccato qualcosa: " + other.name);
             LifeController player = other.GetComponent<LifeController>();
 
             if (player != null)
             {
                 player.TakeDamage(_damage);
 
-                _isAttacking = false;
+                //_isAttacking = false;
             }
         }
     }

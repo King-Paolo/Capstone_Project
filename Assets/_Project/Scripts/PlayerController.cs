@@ -45,8 +45,6 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _ground))
         {
-            //Vector3 targetPoint = hit.point;
-
             Vector3 direction = hit.point - transform.position;
             direction.y = 0;
 
