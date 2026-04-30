@@ -16,8 +16,12 @@ MonoBehaviour:
     type: 3}
   damage: 7
   weaponName: Assault Rifle
-  fireRate: 0.15
+  fireRate: 0.1
   range: 10
   speed: 50
   maxAmmo: 30
   reloadTime: 3.2
+  shootSound: {fileID: 8300000, guid: 25c3278fdf20a2445921fefc4daea4cb, type: 3}
+  reloadSound: {fileID: 8300000, guid: 801a84c4ad414354db3134c129a0e2a4, type: 3}
+  pumpSound: {fileID: 0}
+  delay: 0

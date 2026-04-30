@@ -551,7 +551,7 @@ MonoBehaviour:
   _firePoint: {fileID: 2442528965951142261}
   _layersToHit:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 191
 --- !u!120 &6058356250098962766
 LineRenderer:
   serializedVersion: 2

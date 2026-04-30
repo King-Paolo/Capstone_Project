@@ -780,7 +780,7 @@ MonoBehaviour:
   _firePoint: {fileID: 7489050246011630565}
   _layersToHit:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 191
 --- !u!1001 &867824907973105988
 PrefabInstance:
   m_ObjectHideFlags: 0

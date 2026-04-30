@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _movementSpeed = 5f;
-    [SerializeField] private float _firingSpeed = 2f;
+    [SerializeField] private float _firingSpeed = 2.5f;
     [SerializeField] private float _rotationSpeed = 15f;
     [SerializeField] private Camera _camera;
     [SerializeField] private Animator _animator;

@@ -29,6 +29,12 @@ public class Weapon : MonoBehaviour
         _animator = GetComponentInParent<Animator>();
     }
 
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        _isReloading = false;
+    }
+
     private void Update()
     {
         if (_isReloading)
@@ -69,6 +75,14 @@ public class Weapon : MonoBehaviour
             _currentAmmo--;
             _currentAmmo = Mathf.Clamp(_currentAmmo, 0, _data.maxAmmo);
             Debug.Log("munizioni in canna" + _currentAmmo);
+
+            if (_data.shootSound != null)
+                AudioManager.Instance.PlaySFX( _data.shootSound );
+
+            if (_data.pumpSound != null && _data.weaponName == "Shotgun") 
+            {
+                    StartCoroutine(PlayShotgunPumpSound(_data.delay));
+            }
         }
     }
 
@@ -78,6 +92,9 @@ public class Weapon : MonoBehaviour
         _isReloading = true;
 
         _animator.SetTrigger("IsReloading");
+
+        if (_data.reloadSound != null)
+            AudioManager .Instance.PlaySFX( _data.reloadSound );
 
         yield return new WaitForSeconds(_data.reloadTime);
 
@@ -89,5 +106,13 @@ public class Weapon : MonoBehaviour
 
         _isReloading = false;
         Debug.Log(" caricate " + amountToTake + " munizioni in canna " + _currentAmmo + " Munizioni rimanenti " + _remainingAmmo);
+    }
+
+    private IEnumerator PlayShotgunPumpSound(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (_data.pumpSound != null)
+            AudioManager.Instance.PlaySFX(_data.pumpSound);
     }
 }

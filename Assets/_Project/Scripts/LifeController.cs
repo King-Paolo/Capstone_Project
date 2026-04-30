@@ -6,6 +6,9 @@ public class LifeController : MonoBehaviour
     [SerializeField] private int _hp;
     [SerializeField] private int _maxHp;
 
+    [Header("Player Death Sound")]
+    [SerializeField] private AudioClip _deathSound;
+
     private bool _isDead;
     private Animator _animator;
     private Coroutine _deathCoroutine;
@@ -57,6 +60,9 @@ public class LifeController : MonoBehaviour
                 if (_deathCoroutine != null) StopCoroutine(_deathCoroutine);
                 _deathCoroutine = StartCoroutine(DeathTimer());
             }
+
+            if (CompareTag("Player"))
+                AudioManager.Instance.PlaySFX(_deathSound);
         }
     }
 

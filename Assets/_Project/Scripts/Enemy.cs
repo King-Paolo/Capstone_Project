@@ -8,6 +8,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 5f;
     [SerializeField] private float _slowing = 0.5f;
 
+    [Header("Audio Settings")]
+    [SerializeField] private float _minGrowlDelay = 20f;
+    [SerializeField] private float _maxGrowlDelay = 40f;
+    [SerializeField] private AudioClip[] _audioclips;
+
+    private float _nextGrowlTime;
     private Transform _target;
     private NavMeshAgent _agent;
     private LifeController _enemyLife;
@@ -16,12 +22,15 @@ public class Enemy : MonoBehaviour
     private LifeController _playerLife;
     private float _speed;
     private Coroutine _slowCoroutine;
+    private EnemySFX _enemySFX;
+    private float _nextAttackSoundTime;
 
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _enemyLife = GetComponent<LifeController>();
         _animator = GetComponentInChildren<Animator>();
+        _enemySFX = GetComponent<EnemySFX>();
         _speed = _agent.speed;
     }
 
@@ -75,6 +84,7 @@ public class Enemy : MonoBehaviour
             {
                 _agent.isStopped = true;
                 _agent.enabled = false;
+                _enemySFX.PlaySFX(_audioclips[2]);
 
                 foreach (var col in GetComponentsInChildren<Collider>())
                 {
@@ -105,6 +115,8 @@ public class Enemy : MonoBehaviour
             _agent.isStopped = false;
             _agent.SetDestination(_target.position);
         }
+
+        Growling();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -129,6 +141,13 @@ public class Enemy : MonoBehaviour
     public void Attack()
     {
         _animator.SetTrigger("IsAttacking");
+
+        if (Time.time >= _nextAttackSoundTime)
+        {
+            _enemySFX.PlaySFX(_audioclips[1]);
+
+            _nextAttackSoundTime = Time.time + _audioclips[1].length;
+        }
     }
 
     public void EnableDamage()
@@ -141,6 +160,22 @@ public class Enemy : MonoBehaviour
         _isAttacking = false;
     }
 
+    private void Growling()
+    {
+        if (Time.time >= _nextGrowlTime)
+        {
+            if (_enemySFX != null)
+            {
+                _enemySFX.PlaySFX(_audioclips[0]);
+            }
+            SetNextGrowlTime();
+        }
+    }
+
+    private void SetNextGrowlTime()
+    {
+        _nextGrowlTime = Time.time + Random.Range(_minGrowlDelay, _maxGrowlDelay);
+    }
     private IEnumerator SlowRoutine()
     {
         _agent.speed = _speed * _slowing;

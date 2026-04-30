@@ -21,3 +21,7 @@ MonoBehaviour:
   speed: 50
   maxAmmo: 6
   reloadTime: 3.2
+  shootSound: {fileID: 8300000, guid: a70d999065c84144987186f9fae4ecbc, type: 3}
+  reloadSound: {fileID: 8300000, guid: 5c7e29f73c1d8d24e995eed8f32c04cb, type: 3}
+  pumpSound: {fileID: 8300000, guid: ad92db33ece5c3b488317e3f1c914a64, type: 3}
+  delay: 0.3

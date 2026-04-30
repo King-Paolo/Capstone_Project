@@ -11,4 +11,10 @@ public class SO_WeaponData : ScriptableObject
     public float speed;
     public int maxAmmo;
     public float reloadTime;
+    public AudioClip shootSound;
+    public AudioClip reloadSound;
+
+    [Header("For Shotgun Only")]
+    public AudioClip pumpSound;
+    public float delay;
 }
