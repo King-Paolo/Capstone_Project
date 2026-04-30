@@ -4,17 +4,19 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] int _damage;
+    [SerializeField] private float _rotationSpeed = 5f;
 
     private Transform _target;
     private NavMeshAgent _agent;
-    private LifeController _lifeController;
+    private LifeController _enemyLife;
     private bool _isAttacking;
     private Animator _animator;
+    private LifeController _playerLife;
 
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
-        _lifeController = GetComponent<LifeController>();
+        _enemyLife = GetComponent<LifeController>();
         _animator = GetComponentInChildren<Animator>();
     }
 
@@ -26,6 +28,11 @@ public class Enemy : MonoBehaviour
             _agent.Warp(transform.position);
             _agent.isStopped = false;
             _isAttacking = false;
+
+            foreach (var col in GetComponentsInChildren<Collider>())
+            {
+                col.enabled = true;
+            }
         }
     }
 
@@ -36,27 +43,41 @@ public class Enemy : MonoBehaviour
         if (player != null)
         {
             _target = player.transform;
+            _playerLife = player.GetComponent<LifeController>();
         }
     }
 
     private void Update()
     {
-        if (!_agent.isOnNavMesh)
-            return;
-
-        if (_lifeController.IsDead || _target == null)
+        if (_enemyLife.IsDead)
         {
+            if (_agent.enabled)
+            {
+                _agent.isStopped = true;
+                _agent.enabled = false;
 
-            _agent.isStopped = true;
-            _agent.enabled = false;
+                foreach (var col in GetComponentsInChildren<Collider>())
+                {
+                    col.enabled = false;
+                }
+            }
             return;
         }
+
+        if (!_agent.enabled || !_agent.isOnNavMesh) return;
 
         float distance = Vector3.Distance(transform.position, _target.position);
 
         if (distance <= _agent.stoppingDistance)
         {
             _agent.isStopped = true;
+
+            Vector3 direction = (_target.position - transform.position).normalized;
+            direction.y = 0;
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * _rotationSpeed);
+
+            if (_playerLife != null && !_playerLife.IsDead)
             Attack();
         }
         else
@@ -70,14 +91,11 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Player") && _isAttacking)
         {
-            Debug.Log("Ho toccato qualcosa: " + other.name);
-            LifeController player = other.GetComponent<LifeController>();
-
-            if (player != null)
+            if (_playerLife != null)
             {
-                player.TakeDamage(_damage);
+                _playerLife.TakeDamage(_damage);
 
-                //_isAttacking = false;
+                _isAttacking = false;
             }
         }
     }

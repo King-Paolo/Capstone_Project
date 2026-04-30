@@ -49,5 +49,12 @@ public class WeaponManager : MonoBehaviour
 
         _weaponModels[index].SetActive(true);
         _currentWeaponIndex = index;
+
+        LaserSight currentLaser = _weaponModels[index].GetComponentInChildren<LaserSight>();
+
+        if (currentLaser != null)
+        {
+            currentLaser.SetupLaser(_availableWeapons[index]);
+        }
     }
 }

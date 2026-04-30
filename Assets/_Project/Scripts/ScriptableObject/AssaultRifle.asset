@@ -17,7 +17,7 @@ MonoBehaviour:
   damage: 7
   weaponName: Assault Rifle
   fireRate: 0.15
-  range: 50
+  range: 10
   speed: 50
   maxAmmo: 30
   reloadTime: 3.2

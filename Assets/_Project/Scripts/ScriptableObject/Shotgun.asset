@@ -17,7 +17,7 @@ MonoBehaviour:
   damage: 50
   weaponName: Shotgun
   fireRate: 1.2
-  range: 15
+  range: 5
   speed: 50
   maxAmmo: 6
   reloadTime: 3.2

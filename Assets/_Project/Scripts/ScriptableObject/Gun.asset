@@ -17,7 +17,7 @@ MonoBehaviour:
   damage: 10
   weaponName: Gun
   fireRate: 0.5
-  range: 30
+  range: 10
   speed: 50
   maxAmmo: 12
   reloadTime: 0
