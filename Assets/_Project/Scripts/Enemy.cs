@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -5,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] int _damage;
     [SerializeField] private float _rotationSpeed = 5f;
+    [SerializeField] private float _slowing = 0.5f;
 
     private Transform _target;
     private NavMeshAgent _agent;
@@ -12,12 +14,15 @@ public class Enemy : MonoBehaviour
     private bool _isAttacking;
     private Animator _animator;
     private LifeController _playerLife;
+    private float _speed;
+    private Coroutine _slowCoroutine;
 
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _enemyLife = GetComponent<LifeController>();
         _animator = GetComponentInChildren<Animator>();
+        _speed = _agent.speed;
     }
 
     private void OnEnable()
@@ -25,6 +30,7 @@ public class Enemy : MonoBehaviour
         if (_agent != null)
         {
             _agent.enabled = true;
+            _agent.speed = _speed;
             _agent.Warp(transform.position);
             _agent.isStopped = false;
             _isAttacking = false;
@@ -33,6 +39,20 @@ public class Enemy : MonoBehaviour
             {
                 col.enabled = true;
             }
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_slowCoroutine != null)
+        {
+            StopCoroutine(_slowCoroutine);
+            _slowCoroutine = null;
+        }
+
+        if (_agent != null)
+        {
+            _agent.speed = _speed;
         }
     }
 
@@ -98,6 +118,13 @@ public class Enemy : MonoBehaviour
                 _isAttacking = false;
             }
         }
+
+        if (other.CompareTag("Bullet"))
+        {
+            if (_slowCoroutine != null) StopCoroutine(_slowCoroutine);
+            _slowCoroutine = StartCoroutine(SlowRoutine());
+        }
+
     }
     public void Attack()
     {
@@ -112,5 +139,15 @@ public class Enemy : MonoBehaviour
     public void DisableDamage()
     {
         _isAttacking = false;
+    }
+
+    private IEnumerator SlowRoutine()
+    {
+        _agent.speed = _speed * _slowing;
+
+        yield return new WaitForSeconds(0.5f);
+
+        _agent.speed = _speed;
+        _slowCoroutine = null;
     }
 }

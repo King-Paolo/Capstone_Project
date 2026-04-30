@@ -2040,8 +2040,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a82424dcb288a469f091a4468f4d8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 50
-  _rotationSpeed: 5
+  _damage: 10
+  _rotationSpeed: 7
+  _slowing: 0.5
 --- !u!114 &3257493279394817770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2054,8 +2055,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b05d717af456f4aa680c8d53cb570f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 20
-  _maxHp: 20
+  _hp: 100
+  _maxHp: 100
 --- !u!195 &5898575566201991936
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2066,8 +2067,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -1372625422
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 3.8
+  m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 1.7

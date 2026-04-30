@@ -854,8 +854,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -1372625422
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 3.2
+  m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 2
@@ -901,8 +901,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a82424dcb288a469f091a4468f4d8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 50
-  _rotationSpeed: 5
+  _damage: 30
+  _rotationSpeed: 7
+  _slowing: 0.5
 --- !u!114 &6336989890041428426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,8 +916,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b05d717af456f4aa680c8d53cb570f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 50
-  _maxHp: 50
+  _hp: 500
+  _maxHp: 500
 --- !u!1 &1155104701415362210
 GameObject:
   m_ObjectHideFlags: 0

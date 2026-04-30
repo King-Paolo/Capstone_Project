@@ -8,6 +8,7 @@ public class LifeController : MonoBehaviour
 
     private bool _isDead;
     private Animator _animator;
+    private Coroutine _deathCoroutine;
 
     public bool IsDead { get { return _isDead; } }
 
@@ -25,6 +26,21 @@ public class LifeController : MonoBehaviour
         {
             _hp = _maxHp;
         }
+
+        if (_animator != null)
+        {
+            _animator.Rebind();
+            _animator.Update(0f);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_deathCoroutine != null)
+        {
+            StopCoroutine(_deathCoroutine);
+            _deathCoroutine = null;
+        }
     }
 
     public void SetHp(int hp)
@@ -37,7 +53,10 @@ public class LifeController : MonoBehaviour
             _animator.SetTrigger("IsDead");
 
             if (CompareTag("Enemy"))
-            StartCoroutine(DeathTimer());
+            {
+                if (_deathCoroutine != null) StopCoroutine(_deathCoroutine);
+                _deathCoroutine = StartCoroutine(DeathTimer());
+            }
         }
     }
 
@@ -45,7 +64,9 @@ public class LifeController : MonoBehaviour
 
     public IEnumerator DeathTimer()
     {
-        yield return new WaitForSeconds(10f);
+        FindObjectOfType<EnemySpawner>().EnemyDied();
+
+        yield return new WaitForSeconds(5f);
 
         if (CompareTag("Enemy"))
         {
