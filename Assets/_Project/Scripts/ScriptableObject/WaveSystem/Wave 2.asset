@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028fd493f5a840543bda4ec9db13a9d3, type: 3}
   m_Name: Wave 2
   m_EditorClassIdentifier: 
-  waveName: Medium Wave
+  waveName: Easy Wave
   delayBeforeWave: 7
-  enemyCount: 20
-  spawnRate: 1.2
+  enemyCount: 10
+  spawnRate: 1.5

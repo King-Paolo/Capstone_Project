@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028fd493f5a840543bda4ec9db13a9d3, type: 3}
   m_Name: Wave 4
   m_EditorClassIdentifier: 
-  waveName: Extreme Wave
+  waveName: Hard Wave
   delayBeforeWave: 7
-  enemyCount: 70
-  spawnRate: 0.7
+  enemyCount: 40
+  spawnRate: 1

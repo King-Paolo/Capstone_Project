@@ -1,12 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager Instance { get; private set; }
 
     [SerializeField] private EnemySpawner _enemySpawner;
+    [SerializeField] private UnityEvent<int> OnWaveChanged;
 
     [Header("Wave Settings")]
     [SerializeField] private WaveData[] _waves;
@@ -30,6 +31,8 @@ public class SpawnManager : MonoBehaviour
     {
         for (int i = 0; i < _waves.Length; i++)
         {
+            OnWaveChanged?.Invoke(i + 1);
+
             WaveData currentWave = _waves[i];
 
             yield return new WaitForSeconds(currentWave.delayBeforeWave);

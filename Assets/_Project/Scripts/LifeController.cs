@@ -1,10 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LifeController : MonoBehaviour
 {
     [SerializeField] private int _hp;
     [SerializeField] private int _maxHp;
+    [SerializeField] private UnityEvent<int, int> _onHpChanged;
 
     [Header("Player Death Sound")]
     [SerializeField] private AudioClip _deathSound;
@@ -64,6 +66,9 @@ public class LifeController : MonoBehaviour
             if (CompareTag("Player"))
                 AudioManager.Instance.PlaySFX(_deathSound);
         }
+
+        if (CompareTag("Player"))
+            _onHpChanged.Invoke(_hp, _maxHp);
     }
 
     public void TakeDamage(int damage) => SetHp(_hp - damage);

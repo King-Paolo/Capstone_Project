@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Weapon : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private int _bulletIndex;
     [SerializeField] private Transform _firePoint;
     [SerializeField] private ParticleSystem _muzzleFlash;
+    [SerializeField] private UnityEvent<int, int> _onAmmoChanged;
+    [SerializeField] private UnityEvent<Sprite> OnWeaponEquipped;
 
     private BulletPool _bulletPool;
     private int _currentAmmo;
@@ -28,6 +31,15 @@ public class Weapon : MonoBehaviour
         }
 
         _animator = GetComponentInParent<Animator>();
+
+        UpdateWeaponIcon();
+        UpdateAmmoUI();
+    }
+
+    private void OnEnable()
+    {
+        UpdateWeaponIcon();
+        UpdateAmmoUI();
     }
 
     private void OnDisable()
@@ -76,15 +88,30 @@ public class Weapon : MonoBehaviour
 
             _currentAmmo--;
             _currentAmmo = Mathf.Clamp(_currentAmmo, 0, _data.maxAmmo);
+
+            UpdateAmmoUI();
             Debug.Log("munizioni in canna" + _currentAmmo);
 
             if (_data.shootSound != null)
-                AudioManager.Instance.PlaySFX( _data.shootSound );
+                AudioManager.Instance.PlaySFX(_data.shootSound);
 
-            if (_data.pumpSound != null && _data.weaponName == "Shotgun") 
+            if (_data.pumpSound != null && _data.weaponName == "Shotgun")
             {
-                    StartCoroutine(PlayShotgunPumpSound(_data.delay));
+                StartCoroutine(PlayShotgunPumpSound(_data.delay));
             }
+        }
+    }
+
+    private void UpdateAmmoUI()
+    {
+        _onAmmoChanged?.Invoke(_currentAmmo, _remainingAmmo);
+    }
+
+    private void UpdateWeaponIcon()
+    {
+        if (_data.weaponIcon != null)
+        {
+            OnWeaponEquipped?.Invoke(_data.weaponIcon);
         }
     }
 
@@ -96,7 +123,7 @@ public class Weapon : MonoBehaviour
         _animator.SetTrigger("IsReloading");
 
         if (_data.reloadSound != null)
-            AudioManager .Instance.PlaySFX( _data.reloadSound );
+            AudioManager.Instance.PlaySFX(_data.reloadSound);
 
         yield return new WaitForSeconds(_data.reloadTime);
 
@@ -105,6 +132,8 @@ public class Weapon : MonoBehaviour
 
         _currentAmmo += amountToTake;
         _remainingAmmo -= amountToTake;
+
+        UpdateAmmoUI();
 
         _isReloading = false;
         Debug.Log(" caricate " + amountToTake + " munizioni in canna " + _currentAmmo + " Munizioni rimanenti " + _remainingAmmo);

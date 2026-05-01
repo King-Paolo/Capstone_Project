@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a2293015881dc4e806bdb7146fc7e1, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
+  weaponIcon: {fileID: 21300000, guid: 956e2bc63c7f27642be5291d24bf4a49, type: 3}
   bulletPrefab: {fileID: 8998750919760101644, guid: 8cdee4c0f2bfa724ebf747e8d4f8403b,
     type: 3}
   damage: 50

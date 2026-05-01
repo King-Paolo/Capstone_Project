@@ -4875,7 +4875,6 @@ GameObject:
   m_Component:
   - component: {fileID: 400002}
   - component: {fileID: 10800000}
-  - component: {fileID: 11400000}
   m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
@@ -4960,19 +4959,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96d332ab3dbfaaf40bdd9745ff0b19f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  time: 0.05
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 0
