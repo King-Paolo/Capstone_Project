@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Bullets : MonoBehaviour
 {
+    [SerializeField] private AudioClip _bulletHit;
+
     private int _damage;
     private Rigidbody _rb;
     private Vector3 _direction;
@@ -48,6 +50,7 @@ public class Bullets : MonoBehaviour
         {
             LifeController enemy = other.GetComponent<LifeController>();
             enemy.TakeDamage(_damage);
+            AudioManager.Instance.PlaySFX(_bulletHit);
             Debug.Log("Colpito");
         }
     }

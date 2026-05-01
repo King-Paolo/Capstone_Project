@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private int _remainingAmmo;
     [SerializeField] private int _bulletIndex;
     [SerializeField] private Transform _firePoint;
+    [SerializeField] private ParticleSystem _muzzleFlash;
 
     private BulletPool _bulletPool;
     private int _currentAmmo;
@@ -67,6 +68,7 @@ public class Weapon : MonoBehaviour
 
         if (bullet != null)
         {
+            _muzzleFlash.Play();
             bullet.transform.position = _firePoint.position;
             bullet.transform.rotation = _firePoint.rotation;
 
