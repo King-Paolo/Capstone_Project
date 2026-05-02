@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class Weapon : MonoBehaviour
 {
@@ -50,6 +51,9 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         if (_isReloading)
             return;
 
