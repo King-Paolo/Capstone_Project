@@ -6,8 +6,12 @@ public class SO_WeaponData : ScriptableObject
     public Sprite weaponIcon;
     public Bullets bulletPrefab;
     public int damage;
+    public int bonusDamage;
+    public int finalDamage => damage + bonusDamage;
     public string weaponName;
     public float fireRate;
+    public float fireRateUp;
+    public float finalFireRate => fireRate * fireRateUp;
     public float range;
     public float speed;
     public int maxAmmo;
@@ -18,4 +22,14 @@ public class SO_WeaponData : ScriptableObject
     [Header("For Shotgun Only")]
     public AudioClip pumpSound;
     public float delay;
+
+    public void AddBonusDamage(int amount)
+    {
+        bonusDamage += amount;
+    }
+
+    public void FireRateUp(float amount)
+    {
+        fireRateUp *= amount;
+    }
 }

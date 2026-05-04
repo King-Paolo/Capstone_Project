@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _creditsMenu;
     [SerializeField] private AudioClip _backgroundMusic;
+    [SerializeField] private AudioClip _victoryMusic;
 
     private bool _isPaused;
     private bool _gameEnded;
@@ -61,13 +62,10 @@ public class GameManager : MonoBehaviour
     {
         _gameEnded = true;
         MenuManager.Instance.VictoryMenu(_victoryMenu);
+        AudioManager.Instance.PlayMusic(_victoryMusic);
         Time.timeScale = 0;
     }
 
-    public void TriggerDelayVictory(float delay)
-    {
-        StartCoroutine(DelayVictory(delay));
-    }
     public void GameOver()
     {
         _gameEnded = true;
@@ -108,11 +106,5 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         GameOver();
-    }
-
-    public IEnumerator DelayVictory(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        Victory();
     }
 }

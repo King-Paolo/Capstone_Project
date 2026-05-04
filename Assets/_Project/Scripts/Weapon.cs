@@ -64,7 +64,7 @@ public class Weapon : MonoBehaviour
             if (Time.time >= _shootDelay)
             {
                 Shoot();
-                _shootDelay = Time.time + _data.fireRate;
+                _shootDelay = Time.time + _data.finalFireRate;
             }
         }
         else
@@ -88,7 +88,7 @@ public class Weapon : MonoBehaviour
             bullet.transform.position = _firePoint.position;
             bullet.transform.rotation = _firePoint.rotation;
 
-            bullet.GetComponent<Bullets>().Setup(_firePoint.forward, _data.range, _data.speed, _data.damage);
+            bullet.GetComponent<Bullets>().Setup(_firePoint.forward, _data.range, _data.speed, _data.finalDamage);
 
             _currentAmmo--;
             _currentAmmo = Mathf.Clamp(_currentAmmo, 0, _data.maxAmmo);
@@ -118,6 +118,7 @@ public class Weapon : MonoBehaviour
             OnWeaponEquipped?.Invoke(_data.weaponIcon);
         }
     }
+
 
     public IEnumerator Reload()
     {

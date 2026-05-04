@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MenuManager : MonoBehaviour
@@ -36,5 +37,25 @@ public class MenuManager : MonoBehaviour
     {
         if (creditsMenu != null)
             creditsMenu.SetActive(state);
+    }
+
+    public void WaitHelicopterText(GameObject helicopterText)
+    {
+        if (helicopterText != null)
+            helicopterText.SetActive(true);
+    }
+
+    public void WaveCleared(GameObject waveClearedBanner)
+    {
+        StartCoroutine(ShowBanner(waveClearedBanner));
+    }
+
+    public IEnumerator ShowBanner(GameObject banner)
+    {
+        banner.SetActive(true);
+
+        yield return new WaitForSeconds(5f);
+
+        banner.SetActive(false);
     }
 }

@@ -14,6 +14,7 @@ public class LifeController : MonoBehaviour
     private bool _isDead;
     private Animator _animator;
     private Coroutine _deathCoroutine;
+    private float _delayGameOver = 4f;
 
     public bool IsDead { get { return _isDead; } }
 
@@ -64,7 +65,10 @@ public class LifeController : MonoBehaviour
             }
 
             if (CompareTag("Player"))
+            {
                 AudioManager.Instance.PlaySFX(_deathSound);
+                GameManager.Instance.TriggerDelayGameOver(_delayGameOver);
+            }
         }
 
         if (CompareTag("Player"))

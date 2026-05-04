@@ -8,9 +8,16 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private UnityEvent<int> OnWaveChanged;
+    [SerializeField] private UI_PowerUpPanel _powerUpPanel;
+    [SerializeField] private GameObject _waveClearedBanner;
+    [SerializeField] private Helicopter _helicopter;
+    [SerializeField] private GameObject _helicoperText;
 
     [Header("Wave Settings")]
     [SerializeField] private WaveData[] _waves;
+    [SerializeField] private float _delayBetweenWaves = 3f;
+
+    private int _waveCount = 0;
 
     private void Awake()
     {
@@ -31,6 +38,8 @@ public class SpawnManager : MonoBehaviour
     {
         for (int i = 0; i < _waves.Length; i++)
         {
+            _waveCount = i + 1;
+
             OnWaveChanged?.Invoke(i + 1);
 
             WaveData currentWave = _waves[i];
@@ -43,7 +52,19 @@ public class SpawnManager : MonoBehaviour
 
             yield return new WaitUntil(() => _enemySpawner.IsWaveCleared);
 
-            yield return new WaitForSeconds(2f);
+            MenuManager.Instance.WaveCleared(_waveClearedBanner);
+
+            if (_waveCount == _waves.Length)
+            {
+                _helicopter.gameObject.SetActive(true);
+
+                MenuManager.Instance.WaitHelicopterText(_helicoperText);
+            }
+            else
+            {
+                _powerUpPanel.ShowPowerUps();
+                yield return new WaitForSeconds(_delayBetweenWaves);
+            }
         }
     }
 }
