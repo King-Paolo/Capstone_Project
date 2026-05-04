@@ -904,7 +904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 30
-  _rotationSpeed: 7
+  _rotationSpeed: 20
   _slowing: 0.5
   _minGrowlDelay: 6
   _maxGrowlDelay: 10
@@ -926,6 +926,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 500
   _maxHp: 500
+  _onHpChanged:
+    m_PersistentCalls:
+      m_Calls: []
   _deathSound: {fileID: 0}
 --- !u!114 &-7131653164819981253
 MonoBehaviour:

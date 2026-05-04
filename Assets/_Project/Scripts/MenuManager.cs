@@ -50,6 +50,11 @@ public class MenuManager : MonoBehaviour
         StartCoroutine(ShowBanner(waveClearedBanner));
     }
 
+    public void KeysMap(GameObject keysTutorialBanner)
+    {
+        StartCoroutine(ShowBanner(keysTutorialBanner));
+    }
+
     public IEnumerator ShowBanner(GameObject banner)
     {
         banner.SetActive(true);

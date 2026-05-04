@@ -2171,7 +2171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 10
-  _rotationSpeed: 7
+  _rotationSpeed: 20
   _slowing: 0.5
   _minGrowlDelay: 6
   _maxGrowlDelay: 10
@@ -2193,6 +2193,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 100
   _maxHp: 100
+  _onHpChanged:
+    m_PersistentCalls:
+      m_Calls: []
   _deathSound: {fileID: 0}
 --- !u!195 &5898575566201991936
 NavMeshAgent:

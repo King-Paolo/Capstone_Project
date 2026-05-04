@@ -12,6 +12,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject _waveClearedBanner;
     [SerializeField] private Helicopter _helicopter;
     [SerializeField] private GameObject _helicoperText;
+    [SerializeField] private GameObject _keysMap;
 
     [Header("Wave Settings")]
     [SerializeField] private WaveData[] _waves;
@@ -31,6 +32,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
+        MenuManager.Instance.KeysMap(_keysMap);
         StartCoroutine(GameLoop());
     }
 
@@ -62,6 +64,7 @@ public class SpawnManager : MonoBehaviour
             }
             else
             {
+                yield return new WaitForSeconds(1f);
                 _powerUpPanel.ShowPowerUps();
                 yield return new WaitForSeconds(_delayBetweenWaves);
             }

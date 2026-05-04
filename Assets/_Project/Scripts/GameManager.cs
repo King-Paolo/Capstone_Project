@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _creditsMenu;
     [SerializeField] private AudioClip _backgroundMusic;
     [SerializeField] private AudioClip _victoryMusic;
+    [SerializeField] private SO_WeaponData[] _allWeapons;
 
     private bool _isPaused;
     private bool _gameEnded;
@@ -31,6 +32,8 @@ public class GameManager : MonoBehaviour
     {
         AudioManager.Instance.PlayMusic(_backgroundMusic);
         Time.timeScale = 1f;
+
+        foreach (var weapon in _allWeapons) weapon.ResetWeaponData();
     }
 
     private void Update()

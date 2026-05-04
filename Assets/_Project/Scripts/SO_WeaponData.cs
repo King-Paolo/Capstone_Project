@@ -10,8 +10,8 @@ public class SO_WeaponData : ScriptableObject
     public int finalDamage => damage + bonusDamage;
     public string weaponName;
     public float fireRate;
-    public float fireRateUp;
-    public float finalFireRate => fireRate * fireRateUp;
+    public float fireRateBonusPercentage;
+    public float finalFireRate => fireRate * (1f - fireRateBonusPercentage);
     public float range;
     public float speed;
     public int maxAmmo;
@@ -30,6 +30,14 @@ public class SO_WeaponData : ScriptableObject
 
     public void FireRateUp(float amount)
     {
-        fireRateUp *= amount;
+        fireRateBonusPercentage += amount;
+
+        if (fireRateBonusPercentage > 0.9f) fireRateBonusPercentage = 0.9f;
+    }
+
+    public void ResetWeaponData()
+    {
+        bonusDamage = 0;
+        fireRateBonusPercentage = 0f;
     }
 }

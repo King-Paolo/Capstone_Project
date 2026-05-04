@@ -201,7 +201,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -1372625422
   m_Radius: 0.4
-  m_Speed: 5
+  m_Speed: 7
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 5
-  _rotationSpeed: 7
+  _rotationSpeed: 20
   _slowing: 0.5
   _minGrowlDelay: 6
   _maxGrowlDelay: 10
@@ -275,6 +275,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 50
   _maxHp: 50
+  _onHpChanged:
+    m_PersistentCalls:
+      m_Calls: []
   _deathSound: {fileID: 0}
 --- !u!95 &2708112575742851026
 Animator:
