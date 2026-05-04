@@ -108,7 +108,7 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * _rotationSpeed);
 
             if (_playerLife != null && !_playerLife.IsDead)
-            Attack();
+                Attack();
         }
         else
         {

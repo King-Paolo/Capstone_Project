@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
 
     public bool IsWaveCleared => _enemiesAlive <= 0;
 
-    public void StartWave(WaveData wave)
+    public void StartWave(SO_WaveData wave)
     {
         StartCoroutine(SpawnWaveRoutine(wave));
     }
@@ -45,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
         if (_enemiesAlive < 0) _enemiesAlive = 0;
     }
 
-    private IEnumerator SpawnWaveRoutine(WaveData wave)
+    private IEnumerator SpawnWaveRoutine(SO_WaveData wave)
     {
         _enemiesAlive = 0;
 

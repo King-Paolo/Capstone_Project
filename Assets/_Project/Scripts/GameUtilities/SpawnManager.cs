@@ -15,7 +15,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject _keysMap;
 
     [Header("Wave Settings")]
-    [SerializeField] private WaveData[] _waves;
+    [SerializeField] private SO_WaveData[] _waves;
     [SerializeField] private float _delayBetweenWaves = 3f;
 
     private int _waveCount = 0;
@@ -44,7 +44,7 @@ public class SpawnManager : MonoBehaviour
 
             OnWaveChanged?.Invoke(i + 1);
 
-            WaveData currentWave = _waves[i];
+            SO_WaveData currentWave = _waves[i];
 
             yield return new WaitForSeconds(currentWave.delayBeforeWave);
 
