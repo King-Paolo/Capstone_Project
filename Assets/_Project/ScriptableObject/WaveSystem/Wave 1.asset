@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Wave 1
   m_EditorClassIdentifier: 
   waveName: Very easy Wave
-  delayBeforeWave: 0
+  delayBeforeWave: 3
   enemyCount: 5
   spawnRate: 1.5

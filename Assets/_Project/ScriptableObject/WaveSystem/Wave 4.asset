@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 028fd493f5a840543bda4ec9db13a9d3, type: 3}
+  m_Script: {fileID: 11500000, guid: e8f5053f4c81aa048a3305df231d5948, type: 3}
   m_Name: Wave 4
   m_EditorClassIdentifier: 
-  waveName: Hard Wave
-  delayBeforeWave: 7
-  enemyCount: 40
-  spawnRate: 1
+  waveName: Hard wave
+  delayBeforeWave: 3
+  enemyCount: 30
+  spawnRate: 1.2
